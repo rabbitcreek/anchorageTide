@@ -65,7 +65,7 @@ CRGBPalette16 redPalettes[] = {
 CRGBPalette16 bluePalettes[] = {
     CRGBPalette16(CRGB::DarkBlue, CRGB::Navy, CRGB::MidnightBlue, CRGB::DarkBlue, 
                   CRGB::Navy, CRGB::MidnightBlue, CRGB::DarkBlue, CRGB::Navy, 
-                  CRGB::MidnightBlue, CRGB::DarkBlue, CRGB::Navy, CRGB::MidnightBlue, 
+                  CRGB::White, CRGB::DarkBlue, CRGB::Navy, CRGB::MidnightBlue, 
                   CRGB::DarkBlue, CRGB::Navy, CRGB::MidnightBlue, CRGB::DarkBlue),
     CRGBPalette16(CRGB::Navy, CRGB::MidnightBlue, CRGB::DarkBlue, CRGB::Navy, 
                   CRGB::MidnightBlue, CRGB::DarkBlue, CRGB::Navy, CRGB::MidnightBlue, 
@@ -76,14 +76,14 @@ CRGBPalette16 bluePalettes[] = {
                   CRGB::Navy, CRGB::MidnightBlue, CRGB::DarkBlue, CRGB::Navy, 
                   CRGB::MidnightBlue, CRGB::DarkBlue, CRGB::Navy, CRGB::MidnightBlue),
     CRGBPalette16(CRGB::DarkBlue, CRGB::MidnightBlue, CRGB::Navy, CRGB::DarkBlue, 
-                  CRGB::MidnightBlue, CRGB::Navy, CRGB::DarkBlue, CRGB::MidnightBlue, 
+                  CRGB::MidnightBlue, CRGB::DarkRed, CRGB::DarkBlue, CRGB::MidnightBlue, 
                   CRGB::Navy, CRGB::DarkBlue, CRGB::MidnightBlue, CRGB::Navy, 
                   CRGB::DarkBlue, CRGB::MidnightBlue, CRGB::Navy, CRGB::DarkBlue)
 };
 
 const int numRedPalettes = sizeof(redPalettes) / sizeof(CRGBPalette16);
 const int numBluePalettes = sizeof(bluePalettes) / sizeof(CRGBPalette16);
-const int paletteChangeInterval = 3000; // Time to change palette in milliseconds
+const int paletteChangeInterval = 500; // Time to change palette in milliseconds
 unsigned long lastPaletteChange = 0;
 unsigned long transitionStartTime = 0;
 int currentRedIndex = 0;
@@ -299,8 +299,9 @@ if (tidalRange < 28){
   Serial.println("BIG BORE");
 }
 constrain(tidalRange, 25, 30);
-long q = map(tidalRange, 25, 30, 30, 190);
+long q = map(tidalRange, 25, 30, 10, 160);
 pwm.writeServo(servoPin, q, speed, ke);
+
 
 highKeep = 0.0;
 lowKeep = 0.0;
